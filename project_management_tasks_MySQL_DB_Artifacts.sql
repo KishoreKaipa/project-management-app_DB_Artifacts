@@ -37,11 +37,11 @@ DROP TABLE IF EXISTS `parent_task`;
 CREATE TABLE `parent_task` (
   `parent_id` int(10) NOT NULL AUTO_INCREMENT,
   `parent_task` varchar(200) NOT NULL,
-  `project_id` int(10) NOT NULL,
+  `project_id` int(10) DEFAULT NULL,
   PRIMARY KEY (`parent_id`),
   KEY `parent_task_project_id_fkey_idx` (`project_id`),
   CONSTRAINT `parent_task_project_id_fkey` FOREIGN KEY (`project_id`) REFERENCES `project` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Parent task table';
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8 COMMENT='Parent task table';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -54,11 +54,11 @@ DROP TABLE IF EXISTS `project`;
 CREATE TABLE `project` (
   `project_id` int(10) NOT NULL AUTO_INCREMENT,
   `project` varchar(200) NOT NULL,
-  `start_date` datetime NOT NULL,
-  `end_date` datetime NOT NULL,
-  `priority` int(10) DEFAULT '0',
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL,
+  `priority` int(10) NOT NULL,
   PRIMARY KEY (`project_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -71,12 +71,12 @@ DROP TABLE IF EXISTS `task`;
 CREATE TABLE `task` (
   `task_id` int(10) NOT NULL AUTO_INCREMENT,
   `parent_id` int(10) DEFAULT NULL,
-  `project_id` int(10) NOT NULL,
+  `project_id` int(10) DEFAULT NULL,
   `task_description` varchar(200) NOT NULL,
-  `start_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `end_date` datetime GENERATED ALWAYS AS ((`start_date` + interval 1 day)) STORED,
-  `priority` int(10) DEFAULT '0',
-  `status` varchar(200) NOT NULL DEFAULT 'NOT_STARTED',
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL,
+  `priority` int(10) NOT NULL DEFAULT '0',
+  `status` varchar(200) NOT NULL,
   PRIMARY KEY (`task_id`),
   KEY `project_id_task_fkey_idx` (`project_id`),
   KEY `parent_id_task_fkey_idx` (`parent_id`),
@@ -84,7 +84,7 @@ CREATE TABLE `task` (
   CONSTRAINT `FKksfdm3p03yqyjlnxkb7ixjh2a` FOREIGN KEY (`parent_id`) REFERENCES `parent_task` (`parent_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `parent_id_task_fkey` FOREIGN KEY (`parent_id`) REFERENCES `parent_task` (`parent_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `project_id_task_fkey` FOREIGN KEY (`project_id`) REFERENCES `project` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Task Table';
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8 COMMENT='Task Table';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -101,12 +101,13 @@ CREATE TABLE `users` (
   `last_name` varchar(200) NOT NULL,
   `project_id` int(10) DEFAULT NULL,
   `task_id` int(10) DEFAULT NULL,
+  `user` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`user_id`),
   KEY `FKdbmgdlpkonl25aiqghmhywhlg` (`project_id`),
   KEY `FK3e58f6viwl1yslphpnarqkwgt` (`task_id`),
   CONSTRAINT `FK3e58f6viwl1yslphpnarqkwgt` FOREIGN KEY (`task_id`) REFERENCES `task` (`task_id`) ON UPDATE CASCADE,
   CONSTRAINT `FKdbmgdlpkonl25aiqghmhywhlg` FOREIGN KEY (`project_id`) REFERENCES `project` (`project_id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -118,4 +119,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-09-20  8:53:02
+-- Dump completed on 2019-09-23  9:03:52
