@@ -101,7 +101,6 @@ CREATE TABLE `users` (
   `last_name` varchar(200) NOT NULL,
   `project_id` int(10) DEFAULT NULL,
   `task_id` int(10) DEFAULT NULL,
-  `user` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`user_id`),
   KEY `FKdbmgdlpkonl25aiqghmhywhlg` (`project_id`),
   KEY `FK3e58f6viwl1yslphpnarqkwgt` (`task_id`),
@@ -119,4 +118,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-09-23  9:03:52
+-- Dump completed on 2019-09-25  9:19:35
