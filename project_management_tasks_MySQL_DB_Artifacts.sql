@@ -58,7 +58,7 @@ CREATE TABLE `project` (
   `end_date` date NOT NULL,
   `priority` int(10) NOT NULL,
   PRIMARY KEY (`project_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4674 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -84,7 +84,7 @@ CREATE TABLE `task` (
   CONSTRAINT `FKksfdm3p03yqyjlnxkb7ixjh2a` FOREIGN KEY (`parent_id`) REFERENCES `parent_task` (`parent_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `parent_id_task_fkey` FOREIGN KEY (`parent_id`) REFERENCES `parent_task` (`parent_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `project_id_task_fkey` FOREIGN KEY (`project_id`) REFERENCES `project` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8 COMMENT='Task Table';
+) ENGINE=InnoDB AUTO_INCREMENT=6964 DEFAULT CHARSET=utf8 COMMENT='Task Table';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -106,7 +106,7 @@ CREATE TABLE `users` (
   KEY `FK3e58f6viwl1yslphpnarqkwgt` (`task_id`),
   CONSTRAINT `FK3e58f6viwl1yslphpnarqkwgt` FOREIGN KEY (`task_id`) REFERENCES `task` (`task_id`) ON UPDATE CASCADE,
   CONSTRAINT `FKdbmgdlpkonl25aiqghmhywhlg` FOREIGN KEY (`project_id`) REFERENCES `project` (`project_id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3222 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -118,4 +118,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-09-25  9:19:35
+-- Dump completed on 2019-09-30  0:21:59
